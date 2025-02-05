@@ -27,7 +27,7 @@ server.get("/hello", (req, res) => {
    //resposta para o browser em JSON
    return  res.json({ 
     title: "Hello World",
-    message: `Olá ${nome}, de ${idade} anos de idade, tudo bem?`
+    message: `Olá ${nome}, de ${idade} anos de idade, tudo bem??`
     });
 });
 
@@ -41,7 +41,7 @@ server.get("/hello/:nome/:idade", (req, res) => {
 
     return  res.json({ 
         title: "Hello World",
-        message: `Olá ${nome}, ${idade} anos`
+        message: `Olá ${nome}, ${idade}, anos`
     });
 });
 

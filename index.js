@@ -97,6 +97,21 @@ server.post("/customers", (req, res) =>{
     return res.status(201).json(newCustomer); //status 201 = foi criado
 });
 
+//nova rota com o metodo PUT
+server.put("/customers/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const { name, site } = req.body;
 
+//localizar o customer com determinado id e alterar seus valores
+    const index = customers.findIndex(item => item.id === id);
+    const status = index >= 0 ? 200 : 404;
+
+// se o index for >=0, fazer alteração no array
+    if(index >= 0 ) {
+        customers[index] = { id: parseInt(id), name, site };
+    }
+
+    return res.status(status).json(customers[index]);
+});
 
 server.listen(3000);

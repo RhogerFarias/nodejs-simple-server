@@ -76,6 +76,7 @@ server.get("/customers", (req, res) =>{
     return res.json(customers);
 });
 
+// rota de requisição do customer por meio do id
 server.get("/customers/:id", (req, res) =>{
     const id = parseInt(req.params.id);
     const customer = customers.find(item => item.id === id);
@@ -84,7 +85,17 @@ server.get("/customers/:id", (req, res) =>{
     return res.status(status).json(customer);
 });
 
+// requisição utilizando o metodo POST
+server.post("/customers", (req, res) =>{
+    const { name, site } = req.body; //request body é o conteudo da mensagem que será enviada, no caso o JSON
+//para continuar a inserção de dados é necessario utilizar o array do ultimo registro    
+    const id = customers[customers.length - 1].id + 1; // dessa forma recebemos o ultimo customer + 1
 
+    const newCustomer = { id, name, site };
+    customers.push(newCustomer);
+
+    return res.status(201).json(newCustomer); //status 201 = foi criado
+});
 
 
 

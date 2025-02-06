@@ -1,3 +1,4 @@
+/*
 // requisição do express
 const express = require("express");
 //iniciando o express como servidor
@@ -53,4 +54,38 @@ server.get("/hello/:nome/:idade", (req, res) => {
 
 //selecionando a porta - geralmente 3000, 5000, 8000, 8080 
 server.listen(3000);
+*/
 
+
+//criação e inicialização do express como servidor
+const express = require("express");
+const server = express();
+
+//express.json()
+server.use(express.json());
+
+//um array de customers
+let customers = [
+    { id: 1, name: "Rhoger Site", site: "http://rhogersite.com.br"},
+    { id: 2, name: "Google", site:"http://google.com"},
+    { id: 3, name: "UOL", site:"http://uol.com.br"}
+];
+
+//criação de rota de listagem
+server.get("/customers", (req, res) =>{
+    return res.json(customers);
+});
+
+server.get("/customers/:id", (req, res) =>{
+    const id = parseInt(req.params.id);
+    const customer = customers.find(item => item.id === id);
+    const status = customer ? 200 : 404; //se o customer existir = 200 se não = 404
+    
+    return res.status(status).json(customer);
+});
+
+
+
+
+
+server.listen(3000);

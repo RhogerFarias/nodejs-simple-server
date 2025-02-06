@@ -114,4 +114,18 @@ server.put("/customers/:id", (req, res) => {
     return res.status(status).json(customers[index]);
 });
 
+//metodo delete
+server.delete("/customers/:id", (req, res) => {
+    const id = parseInt(req.params.id);
+    const index = customers.findIndex(item => item.id === id);
+    const status = index >= 0 ? 200 : 404;
+
+// splice é a remoção de objetos em uma posição especifica, e a quantidade dever ser passada (index, 1)
+    if(index >= 0 ) {
+        customers.splice(index, 1);
+    }
+
+        return res.status(status).json();
+    });    
+    
 server.listen(3000);
